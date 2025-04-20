@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strava-like Subscription Plans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f7f7fa;
+      color: #242428;
+      line-height: 1.5;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 16px 32px;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fc5200;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .header h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+      color: #242428;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .toggle {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 4px;
+      border-radius: 24px;
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .toggle-option {
+      padding: 8px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-option.active {
+      background: #fc5200;
+      color: white;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .plan {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      transition: transform 0.3s ease;
+      border: 1px solid #e5e5e5;
+    }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .plan.recommended {
+      border: 2px solid #fc5200;
+      position: relative;
+    }
+
+    .recommended-badge {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: #fc5200;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .plan-name {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .plan-price {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 24px 0;
+    }
+
+    .plan-price span {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin: 24px 0;
+    }
+
+    .plan-features li {
+      margin: 12px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #fc5200;
+    }
+
+    .cta-button {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: #fc5200;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background: #e64800;
+    }
+
+    .cta-button.secondary {
+      background: white;
+      color: #fc5200;
+      border: 2px solid #fc5200;
+    }
+
+    .cta-button.secondary:hover {
+      background: #fff5f2;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 32px;
+      }
+
+      .plans {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">STRAVA</a>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      <h1>Choose Your Plan</h1>
+      <p>Join millions of athletes who trust Strava to reach their goals</p>
+    </div>
+
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-option active" onclick="toggleBilling(this, 'monthly')">Monthly</div>
+        <div class="toggle-option" onclick="toggleBilling(this, 'annual')">Annual</div>
+      </div>
+      <span>Save 20% annually</span>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <h2 class="plan-name">Free</h2>
+        <p>Basic tracking and social features</p>
+        <div class="plan-price">$0 <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>Record and share activities</li>
+          <li>Join clubs and challenges</li>
+          <li>Basic performance analytics</li>
+          <li>Route planning</li>
+        </ul>
+        <button class="cta-button secondary">Get Started</button>
+      </div>
+
+      <div class="plan recommended">
+        <div class="recommended-badge">Most Popular</div>
+        <h2 class="plan-name">Premium</h2>
+        <p>Advanced analysis and training tools</p>
+        <div class="plan-price" id="premium-price">$7.99 <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>All Free features</li>
+          <li>Advanced performance analytics</li>
+          <li>Training plans</li>
+          <li>Route builder with heat maps</li>
+          <li>Segment competition</li>
+          <li>Live segments</li>
+          <li>Power analysis</li>
+        </ul>
+        <button class="cta-button">Subscribe Now</button>
+      </div>
+
+      <div class="plan">
+        <h2 class="plan-name">Elite</h2>
+        <p>Professional training and analytics suite</p>
+        <div class="plan-price" id="elite-price">$12.99 <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>All Premium features</li>
+          <li>Advanced training metrics</li>
+          <li>Recovery time analysis</li>
+          <li>Race performance analytics</li>
+          <li>Personal coaching insights</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="cta-button">Subscribe Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleBilling(element, type) {
+      document.querySelectorAll('.toggle-option').forEach(opt => opt.classList.remove('active'));
+      element.classList.add('active');
+
+      const premiumPrice = document.getElementById('premium-price');
+      const elitePrice = document.getElementById('elite-price');
+
+      if (type === 'annual') {
+        premiumPrice.innerHTML = '$59.99 <span>/ year</span>';
+        elitePrice.innerHTML = '$99.99 <span>/ year</span>';
+      } else {
+        premiumPrice.innerHTML = '$7.99 <span>/ month</span>';
+        elitePrice.innerHTML = '$12.99 <span>/ month</span>';
+      }
+    }
+  </script>
+</body>
+</html>
