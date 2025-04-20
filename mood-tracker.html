@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mood Tracker After Workout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url('images/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 100vh;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fc5200;
+      text-decoration: none;
+    }
+
+    .main-content {
+      height: calc(100vh - 64px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mood-box {
+      background: #1e1e1e;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 320px;
+      color: #f0f0f0;
+    }
+
+    .mood-box h2 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #ffa07a;
+    }
+
+    .emojis {
+      margin-bottom: 20px;
+      font-size: 36px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .emojis span {
+      margin: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .emojis span:hover {
+      transform: scale(1.3);
+    }
+
+    .emojis span.selected {
+      transform: scale(1.4);
+      border: 2px solid #ffa07a;
+      border-radius: 50%;
+      padding: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      resize: none;
+      font-size: 12px;
+      background-color: #2e2e2e;
+      color: #f0f0f0;
+    }
+
+    .submit-btn {
+      background-color: #FF5E5E;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #e04e4e;
+    }
+
+    .success-message {
+      margin-top: 10px;
+      color: #7CFC00;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">STRAVA</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="mood-box">
+      <h2>How did you feel after your workout?</h2>
+      <div class="emojis" id="emoji-container">
+        <span>😄</span>
+        <span>🙂</span>
+        <span>😐</span>
+        <span>😓</span>
+        <span>😡</span>
+      </div>
+      <textarea id="notes" rows="3" placeholder="Any notes about your session?"></textarea>
+      <button class="submit-btn" onclick="submitMood()">Submit</button>
+      <div class="success-message" id="success">Mood submitted successfully!</div>
+    </div>
+  </div>
+
+  <script>
+    let selectedEmoji = null;
+
+    // Emoji click selection
+    document.querySelectorAll('#emoji-container span').forEach((emoji) => {
+      emoji.addEventListener('click', () => {
+        document.querySelectorAll('#emoji-container span').forEach(e => e.classList.remove('selected'));
+        emoji.classList.add('selected');
+        selectedEmoji = emoji.textContent;
+      });
+    });
+
+    function submitMood() {
+      const notes = document.getElementById("notes").value;
+      const successMsg = document.getElementById("success");
+
+      if (!selectedEmoji) {
+        alert("Please select an emoji for your mood!");
+        return;
+      }
+
+      // Simulate processing
+      console.log("Mood:", selectedEmoji);
+      console.log("Notes:", notes);
+
+      successMsg.style.display = "block";
+      setTimeout(() => {
+        successMsg.style.display = "none";
+        document.querySelectorAll('#emoji-container span').forEach(e => e.classList.remove('selected'));
+        selectedEmoji = null;
+        document.getElementById("notes").value = "";
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>

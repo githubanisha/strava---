@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Strava</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1.logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: #fc4c02;
+      margin-bottom: 30px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    button.submit-btn {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #fc4c02;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button.submit-btn:hover {
+      background-color: #e04301;
+    }
+
+    .forgot-password {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .forgot-password a {
+      color: #fc4c02;
+      text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1 class="logo"><strong>Strava</strong></h1>
+    <form class="login-form" onsubmit="redirectToIndex(event)">
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+    <p class="forgot-password">
+      Forgot your password? <a href="mailto:support@strava.com">Contact support</a>
+    </p>
+  </div>
+
+  <script>
+    function redirectToIndex(event) {
+      event.preventDefault();
+      // Simulate successful login
+      window.location.href = "index.html"; // Redirect to index.html
+    }
+  </script>
+</body>
+</html>
